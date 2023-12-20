@@ -1,6 +1,17 @@
 # React Film Archive
 
-Film Archive using React hooks like useMemo, useCallback and useRef
+Film Archive using React hooks like `useMemo`, `useCallback` and `useRef`
+
+## The reason behind this project
+
+This project comes from `Midudev's React Crash Curse` on YouTube:
+
+- [Technical Test. Learn useMemo, useCallback y useRef
+  (2:05:51)](https://www.youtube.com/watch?v=GOEiMwDJ3lc&list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29&index=5)
+  - Title translated by me. The original is in spanish.
+
+In this video he shows a Technical Test and he leverage the experience teaching
+how to use the React hooks like `useMemo`, `useCallback` and `useRef`
 
 ## Technical Test Statement
 
