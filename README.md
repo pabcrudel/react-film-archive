@@ -50,3 +50,12 @@ appearance of the page. He suggested two however he chose the first one:
 
 - [Water.css](https://watercss.kognise.dev/)
 - [Bolt.css](https://boltcss.com/)
+
+### Store a Mock Api Response
+
+He suggested to store in the project an API response
+[with results](src/mocks/omdb-api-data-response/with-results.json) and
+[without results](src/mocks/omdb-api-data-response/without-results.json). This
+is useful to have an example of the responses and to use it to develop the
+program without being sending request. As I'm using the free tier, I have a
+daily limit of 1000 request.
