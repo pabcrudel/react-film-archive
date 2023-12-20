@@ -1,5 +1,7 @@
 # React Film Archive
 
+Film Archive using React hooks like useMemo, useCallback and useRef
+
 ## Technical Test Statement
 
 Create an application to search for movies.
