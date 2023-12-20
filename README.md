@@ -40,3 +40,13 @@ First iteration:
 - Make the search happen automatically while typing.
 
 - Avoid continuous searching while typing (debounce).
+
+## Midudev's Technical Test Tips
+
+### Use of CSS Frameworks Class Less
+
+There are some CSS Frameworks that add some base styles to improve the
+appearance of the page. He suggested two however he chose the first one:
+
+- [Water.css](https://watercss.kognise.dev/)
+- [Bolt.css](https://boltcss.com/)
