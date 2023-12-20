@@ -17,13 +17,13 @@ function DisplayFilms ({ films }) {
       <ul>
         {
           films.map(film => (
-            <li key={film.imdbID}>
+            <li key={film.id}>
               <section className='filmData'>
-                <h3>{film.Title}</h3>
-                <p>{film.Year}</p>
+                <h3>{film.title}</h3>
+                <p>{film.year}</p>
                 <img
-                  src={film.Poster}
-                  alt={`Poster of the film "${film.Title}"`}
+                  src={film.poster}
+                  alt={`Poster of the film "${film.title}"`}
                   crossOrigin='anonymous'
                 />
               </section>

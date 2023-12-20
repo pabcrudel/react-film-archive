@@ -59,3 +59,21 @@ He suggested to store in the project an API response
 is useful to have an example of the responses and to use it to develop the
 program without being sending request. As I'm using the free tier, I have a
 daily limit of 1000 request.
+
+### Isolate API contract and components data
+
+Consist of create a new object with the same structure but different
+variable names (the same or a new ones) and use them in the components or other
+sections of the app.
+
+```js
+const mappedFilms = films.map(film => ({
+  id: film.imdbID,
+  title: film.Title,
+  year: film.Year,
+  poster: film.Poster
+}));
+```
+
+If the API is changed, this allows you tu update the data
+once regardless where the data is being used.
