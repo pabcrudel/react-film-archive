@@ -3,17 +3,21 @@ import FilmsHoarding from './components/FilmsHoarding';
 import { useFilms } from './hooks/useFilms';
 
 export default function App () {
-  const { films } = useFilms();
+  const { films, getFilms, filmsError, loading } = useFilms();
 
   return (
     <>
       <header>
         <h1>React Film Archive</h1>
-        <FilmForm/>
+        <FilmForm getFilms={getFilms}/>
       </header>
 
       <main>
-        <FilmsHoarding films={films} />
+        <FilmsHoarding
+          films={films}
+          loading={loading}
+          filmsError={filmsError}
+        />
       </main>
     </>
   );
