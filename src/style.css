@@ -19,3 +19,27 @@
 *, *::before, *::after {
   box-sizing: inherit;
 }
+
+.filmsHoarding ul {
+  /* Reset list default style */
+  list-style-type: none;
+  padding: 0;
+
+  /* Creates a responsive Grid layout */
+  display: grid;
+    /* Fit automatically the number of columns depending on the container size:
+     * - Each column will be between 200px and the whole space
+    */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+/* Center the text inside films hoarding */
+.filmsHoarding {
+  text-align: center;
+}
+
+/* Each poster's corner will be rounded */
+.filmsHoarding img {
+  border-radius: 8px;
+}
