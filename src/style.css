@@ -20,6 +20,27 @@
   box-sizing: inherit;
 }
 
+/* Form and clear button in the same row */
+.filmForm header {
+  display: flex;
+  flex-direction: row;
+}
+.filmForm form {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+/* Search bar input will be bigger than it's siblings */
+.filmForm form .searchBar {
+  flex-grow: 1;
+}
+
+/* Input errors will be red */
+.filmForm footer p {
+  color: red;
+  margin: 0;
+}
+
 .filmsHoarding ul {
   /* Reset list default style */
   list-style-type: none;
