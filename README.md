@@ -77,3 +77,12 @@ const mappedFilms = films.map(film => ({
 
 If the API is changed, this allows you tu update the data
 once regardless where the data is being used.
+
+## Use of React hooks
+
+## useRef
+
+Creates a mutable reference that persists throughout the life cycle of the
+component. It can store any value that can be mutated (an id, a DOM element, a
+counter). The main benefit is that every time the value changes, the component
+is not re-rendered. In other words, the value persists between renders.
