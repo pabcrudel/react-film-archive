@@ -1,13 +1,53 @@
-export default function FilmForm () {
+import PropTypes from 'prop-types';
+import { useSearch } from '../hooks/useSearch';
+
+export default function FilmForm ({ getFilms }) {
+  const { searchQuery, setSearchQuery, searchError, clearSearch } = useSearch();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const { filmQuery } = Object.fromEntries(
+      new window.FormData(event.target)
+    );
+    getFilms(filmQuery);
+  };
+
+  const handleChange = event => setSearchQuery(event.target.value);
+
+  const isClearDisabled = !searchQuery && !searchError;
+
   return (
-    <form className="filmForm">
-      <label htmlFor="film">Enter a film name</label>
-      <input
-        type="text"
-        id="film"
-        placeholder="Harry Potter, Star Wars..."
-      />
-      <input type="submit" value="Search" />
-    </form>
+    <>
+      <section className="filmForm">
+        <header>
+          <form onSubmit={handleSubmit}>
+            <input
+              className='searchBar'
+              required
+              type="text"
+              id="film"
+              name="filmQuery"
+              placeholder="Harry Potter, Star Wars, Interstellar..."
+              value={searchQuery}
+              onChange={handleChange}
+            />
+            <input type="submit" value="Search" disabled={!searchQuery} />
+          </form>
+          <button onClick={clearSearch} disabled={isClearDisabled}>
+            Clear
+          </button>
+        </header>
+
+        {
+          searchError && (
+            <footer>
+              <p>{searchError}</p>
+            </footer>
+          )
+        }
+      </section>
+    </>
   );
 }
+
+FilmForm.propTypes = { getFilms: PropTypes.func.isRequired };
