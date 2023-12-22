@@ -80,9 +80,68 @@ once regardless where the data is being used.
 
 ## Use of React hooks
 
-## useRef
+### useRef
 
 Creates a mutable reference that persists throughout the life cycle of the
 component. It can store any value that can be mutated (an id, a DOM element, a
 counter). The main benefit is that every time the value changes, the component
 is not re-rendered. In other words, the value persists between renders.
+
+### useMemo & useCallback
+
+React Hooks like `useState`, `useRef` or `useEffect` will be executed onces, at
+the beginning of the component or Custom Hook life cycle. However, any function
+or calculated value that is declared inside the body will be re-created or
+re-calculated. Furthermore, if that function is being used at any point of that
+body, it will be re-executed too.
+
+#### useMemo
+
+To avoid that, React provides a new Hook: `useMemo`. It performs a `memoization`
+of a given calculated value or function to optimize the component or Custom
+Hook. The target will be executed on any given dependency change.
+
+```js
+const sortedFilms = useMemo(() => {
+  return sort ?
+    [...films].sort((a, b) => a.title.localeCompare(b.title)) :
+    films
+}, [sort, films])
+```
+
+#### useCallback
+
+As I said before, on any render a function is destroyed and created. You can use
+`useMemo` to avoid that. However, it's better to use `useCallback` because it's
+implementation is easier and it uses `useMemo` under the hood.
+
+> [Under the hood](https://en.wiktionary.org/wiki/under_the_hood): Beneath the
+surface; in its internal workings.
+
+```js
+  // useMemo()
+
+  const clearSearch = useMemo(() => {
+    return () => {
+      setSearchQuery('');
+      setSearchError(null);
+      isFirstInput.current = true;
+    }
+  }, []);
+```
+
+```js
+  // useCallback()
+
+  const clearSearch = useCallback(() => {
+    setSearchQuery('');
+    setSearchError(null);
+    isFirstInput.current = true;
+  }, []);
+```
+
+In this case, I wanted to render `clearSearch` once, at the beginning of the
+life cycle. That't why there aren't any dependencies.
+
+In conclusion, use `useMemo` with calculated values and `useCallback` with
+functions.
