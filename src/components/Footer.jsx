@@ -51,8 +51,7 @@ export default function Footer ({ repositoryName }) {
 
       <aside id="copyright">
         <p>
-          &copy; Copyright <time dateTime="2023">2023</time> Pablo Cru.
-          <a
+          &copy; Copyright <time dateTime="2023">2023</time> Pablo Cru. <a
             href={licenseUrl}
             title="Take a look at the permissions, limitations and conditions"
           >MIT License</a>.
