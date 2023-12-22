@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { searchFilms, mapFilms } from '../services/search-films';
 import { Search } from '../mocks/omdb-api-data-response/with-results.json';
 
@@ -8,7 +8,7 @@ export function useFilms () {
   const [loading, setLoading] = useState(false);
   const previousQuery = useRef('');
 
-  async function getFilms (filmQuery) {
+  const getFilms = useCallback(async filmQuery => {
     // Avoiding repeated queries
     if (previousQuery.current === filmQuery) return;
     previousQuery.current = filmQuery;
@@ -26,7 +26,7 @@ export function useFilms () {
     }
 
     setLoading(false);
-  }
+  }, []);
 
   return { films, getFilms, filmsError, loading };
 }

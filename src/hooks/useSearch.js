@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 export function useSearch () {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,11 +19,11 @@ export function useSearch () {
     setSearchError(null);
   }, [searchQuery]);
 
-  function clearSearch () {
+  const clearSearch = useCallback(() => {
     setSearchQuery('');
     setSearchError(null);
     isFirstInput.current = true;
-  }
+  }, []);
 
   return { searchQuery, setSearchQuery, searchError, clearSearch };
 }
