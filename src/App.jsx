@@ -1,6 +1,7 @@
 import FilmForm from './components/FilmForm';
 import FilmsHoarding from './components/FilmsHoarding';
 import { useFilms } from './hooks/useFilms';
+import Footer from './components/Footer';
 
 export default function App () {
   const { films, getFilms, filmsError, loading } = useFilms();
@@ -19,6 +20,8 @@ export default function App () {
           filmsError={filmsError}
         />
       </main>
+
+      <Footer repositoryName='react-film-archive'/>
     </>
   );
 }
