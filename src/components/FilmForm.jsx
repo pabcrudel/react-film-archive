@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import { useSearch } from '../hooks/useSearch';
+import debounce from 'just-debounce-it';
+import { useRef } from 'react';
 
 export default function FilmForm ({ getFilms }) {
   const { searchQuery, setSearchQuery, searchError, clearSearch } = useSearch();
@@ -12,7 +14,16 @@ export default function FilmForm ({ getFilms }) {
     getFilms(filmQuery);
   };
 
-  const handleChange = event => setSearchQuery(event.target.value);
+  const handleChange = event => {
+    const searchQuery = event.target.value;
+    setSearchQuery(searchQuery);
+
+    debouncedGetFilms.current(searchQuery);
+  };
+
+  const debouncedGetFilms = useRef(
+    debounce((searchQuery) => getFilms(searchQuery), 500)
+  );
 
   const isClearDisabled = !searchQuery && !searchError;
 
