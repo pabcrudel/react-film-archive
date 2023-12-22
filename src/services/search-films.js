@@ -1,3 +1,5 @@
+import { getWithTTL, setWithTTL } from '../utils/storage-manager';
+
 const ERROR_UNAUTHORIZED = '401';
 const ERROR_TO_MANY_RESULTS = 'Too many results.';
 
@@ -5,25 +7,13 @@ export async function searchFilms (filmQuery) {
   try {
     if (!filmQuery) throw new Error('A film name must be provided');
 
-    // Fetching films from OMDb API
-    const response = await fetch(
-      'https://www.omdbapi.com/?' +
-      `apikey=${import.meta.env.VITE_OMBD_API_KEY}` +
-      `&s=${filmQuery}`
-    );
+    const storedFilms = getWithTTL(filmQuery);
+    if (storedFilms?.length) return storedFilms;
 
-    // Returns the status of the error as a string
-    if (!response.ok) throw new Error(response.status);
+    const films = await fetchingFilms(filmQuery);
+    setWithTTL(filmQuery, films);
 
-    // Parse the response if the response is ok
-    const result = await response.json();
-
-    /* This API returns 200 even if there is an error.
-    * - For example: "Too many results."
-    */
-    if (result.Response === 'False') throw new Error(result.Error);
-
-    return mapFilms(result.Search);
+    return films;
 
   // Return a custom error message.
   } catch (error) {
@@ -36,6 +26,28 @@ export async function searchFilms (filmQuery) {
         return error.message;
     }
   }
+}
+
+/** Fetching films from OMDb API */
+async function fetchingFilms (filmQuery) {
+  const response = await fetch(
+    'https://www.omdbapi.com/?' +
+    `apikey=${import.meta.env.VITE_OMBD_API_KEY}` +
+    `&s=${filmQuery}`
+  );
+
+  // Returns the status of the error as a string
+  if (!response.ok) throw new Error(response.status);
+
+  // Parse the response if the response is ok
+  const result = await response.json();
+
+  /* This API returns 200 even if there is an error.
+  * - For example: "Too many results."
+  */
+  if (result.Response === 'False') throw new Error(result.Error);
+
+  return mapFilms(result.Search);
 }
 
 /** Isolate API contract and components data.
